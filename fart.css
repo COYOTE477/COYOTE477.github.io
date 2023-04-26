@@ -6,3 +6,10 @@ h1 {
     color: navy;
     margin-left: 20px;
 }
+
+p {
+    color: rgb(123, 64, 155);
+    margin-left: 20px;
+    text-shadow: 5px 5px black;
+    text-shadow: -5px -5px rgb(255, 255, 255);
+}
