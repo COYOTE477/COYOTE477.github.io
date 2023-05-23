@@ -125,14 +125,33 @@ function everyinterval(n) {
     return false;
 }
 
+window.addEventListener("keydown", function(event) {
+    if (event.defaultPrevented) {
+        return;
+    }
+    if (event.code === "Space") {
+        // Handle "down"
+        accelerate(-0.2);
+    }
+});
+window.addEventListener("keyup", function(event) {
+    if (event.defaultPrevented) {
+        return;
+    }
+    if (event.code === "Space") {
+        // Handle "down"
+        accelerate(0.05);
+    }
+});
 function accelerate(n) {
     myGamePiece.gravity = n;
 }
+
 </script>
 <br>
 <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
-<button onmousedown="window.location.reload()">retart</button>
-<p>Use the ACCELERATE button to stay in the air</p>
+<button onmousedown="window.location.reload()">restart</button>
+<p>Use the ACCELERATE button or Space Bar to stay in the air</p>
 <p>How long can you stay alive?</p>
 </body>
 </html>
