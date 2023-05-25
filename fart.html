@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <head>
+        <link rel="stylesheet" href="fancy.css">
+    </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
 canvas {
@@ -149,8 +152,28 @@ function accelerate(n) {
 
 </script>
 <br>
-<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
-<button onmousedown="window.location.reload()">restart</button>
+<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)" class="btn" type="button">
+    <strong>ACCELERATE</strong>
+    <div id="container-stars">
+      <div id="stars"></div>
+    </div>
+  
+    <div id="glow">
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </button>
+  <button onmousedown="window.location.reload()" class="btn" type="button">
+    <strong>RESTART</strong>
+    <div id="container-stars">
+      <div id="stars"></div>
+    </div>
+  
+    <div id="glow">
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </button>
 <p>Use the ACCELERATE button or Space Bar to stay in the air</p>
 <p>How long can you stay alive?</p>
 </body>
