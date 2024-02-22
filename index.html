@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="main.css">
+    
+    <script>
+        function getRandomColor() {
+          var letters = '0123456789ABCDEF';
+          var color = '#';
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+      
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.documentElement.style.setProperty('--background-color', getRandomColor());
+        });
+      </script>
+</head>
+<body>
+    <h1>COYOTE477's Epic Webby(Website)</h1>
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <script src="game.js"></script>
+</body>
+</html>

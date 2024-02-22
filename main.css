@@ -1,0 +1,15 @@
+:root {
+    --background-color: #ffffff; /* Default background color */
+}
+
+body {
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+canvas {
+    border: 5px solid black;
+}
