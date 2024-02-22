@@ -114,7 +114,7 @@ function update() {
 function placePipes() {
     if (gameOver) {
         return;
-,    }
+    }
     let randomPipeY = pipeY - pipeHeight/4 - Math.random()*(pipeHeight/2);
     let openingSpace = board.height/4;
 
