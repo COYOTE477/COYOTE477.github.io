@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const ctx = canvas.getContext('2d');
     const restartButton = document.getElementById('restartButton');
     const flagtext = document.getElementById('FlagsLeft');
-    const boardSize = 20;
-    const cellSize = 800 / boardSize; // width divided by cell for perfect scaling
-    const mines = 50;
+    let boardSize = 10;
+    let cellSize = 800 / boardSize; // width divided by cell for perfect scaling
+    let mines = 10;
     let fail = false;
     let flagsleft = mines;
     restartButton.addEventListener('click', function() {
@@ -166,6 +166,8 @@ function revealCell(board, row, col) {
 }
 
 function restartGame() {
+    mines = parseFloat(document.getElementById('mines').value);
+    boardSize = parseFloat(document.getElementById('size').value);
     fail = false;
     flagsleft = mines;
     for (let i = 0; i < board.length; i++) {
@@ -178,10 +180,16 @@ function restartGame() {
             };
         }
     }
+    cellSize = 800 / boardSize; // Adjust this 800 if you want a different canvas size
 
+    // Update the canvas size to match the new board
+    canvas.width = cellSize * boardSize;
+    canvas.height = cellSize * boardSize;
     // restart everything
+    board = initializeBoard(boardSize, boardSize)
     placeMines(board, mines);
     calculateAdjacency(board);
+    
     drawBoard(board, ctx, cellSize);
 }
 
@@ -212,7 +220,7 @@ function cellClicked(board, gridX, gridY) {
 }
 
 // start ze board!
-const board = initializeBoard(boardSize, boardSize);
+let board = initializeBoard(boardSize, boardSize);
 placeMines(board, mines);
 calculateAdjacency(board);
 
