@@ -167,6 +167,7 @@ function revealCell(board, row, col) {
 
 function restartGame() {
     fail = false;
+    flagsleft = mines;
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
             board[i][j] = { //yup... restart that game!
