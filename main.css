@@ -4,12 +4,32 @@
 
 body {
     background-color: var(--background-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     margin: 0;
 }
 canvas {
     border: 5px solid black;
+}
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.game-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    filter: hue-rotate(180deg);
+    color: var(--background-color);
+    font-size: 100px;
+    font-weight: bold;
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
 }

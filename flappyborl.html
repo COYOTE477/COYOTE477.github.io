@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Borl!</title>
+    <link rel="stylesheet" href="main.css">
+    
+    <script>
+        function getRandomColor() {
+          var letters = '0123456789ABCDEF';
+          var color = '#';
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+      
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.documentElement.style.setProperty('--background-color', getRandomColor());
+        });
+      </script>
+</head>
+<body>
+    <canvas id="board" width="320" height="480"></canvas>
+    <script src="flappyborl.js"></script>
+</body>
+</html>
