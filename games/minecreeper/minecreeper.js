@@ -166,8 +166,25 @@ function revealCell(board, row, col) {
 }
 
 function restartGame() {
-    mines = parseFloat(document.getElementById('mines').value);
-    boardSize = parseFloat(document.getElementById('size').value);
+    let suggestedmines = parseFloat(document.getElementById('mines').value);
+    let suggestedboardSize = parseFloat(document.getElementById('size').value);
+
+    if (suggestedboardSize > 100 && suggestedboardSize < 150){
+        alert("too big to have fun")
+        boardSize = parseFloat(document.getElementById('size').value);
+    } else if (suggestedboardSize > 149) {
+        alert("stop");
+    } else {
+        boardSize = parseFloat(document.getElementById('size').value);
+    }
+
+    if (suggestedmines > (suggestedboardSize * suggestedboardSize)){
+        alert("you dumb as hell how you gonna have more mines than tiles")
+    } else{
+        mines = parseFloat(document.getElementById('mines').value);
+    }
+
+    
     fail = false;
     flagsleft = mines;
     for (let i = 0; i < board.length; i++) {
@@ -189,7 +206,6 @@ function restartGame() {
     board = initializeBoard(boardSize, boardSize)
     placeMines(board, mines);
     calculateAdjacency(board);
-    
     drawBoard(board, ctx, cellSize);
 }
 
