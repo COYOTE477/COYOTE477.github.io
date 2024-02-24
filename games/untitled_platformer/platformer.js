@@ -27,27 +27,54 @@ class Player {
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
     update() {
-        if (this.sides.bottom < canvas.height) {
+        this.position.x += this.velocity.x
+        this.position.y += this.velocity.y
+        this.velocity.x *= 0.6
+        this.sides.bottom = this.position.y + this.height
+        if (this.sides.bottom + this.velocity.y < canvas.height) {
             this.velocity.y++
-            this.position.y += this.velocity.y
-            this.sides.bottom = this.position.y + this.height
-        }
+        } else this.velocity.y = 0
     }
+}
 
+class Sprite {
+    constructor({position}) {
+        this.position = position
+        this.image = new Image()
+    }
 }
 
 const player = new Player()
 
+const keys = {
+    w: {
+        pressed: false
+    },
+    a: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
+}
+
 // let bottom = y + 100
+
+
 
 function animate() {
     window.requestAnimationFrame(animate)
     c.clearRect
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height)
+    player.velocity.x = 0
+    if (keys.d.pressed){
+        player.velocity.x = 5
+    } else if (keys.a.pressed) {
+        player.velocity.x = -5
+    }
     player.update()
     player.draw()
 }
-
 
 animate()
