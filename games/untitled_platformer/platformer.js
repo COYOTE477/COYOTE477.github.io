@@ -15,8 +15,8 @@ class Player {
             x: 1,
             y: 1
         }
-        this.width = 100
-        this.height = 100
+        this.width = 50
+        this.height = 50
         this.sides = {
             bottom: this.position.y + this.height
         }
@@ -29,7 +29,7 @@ class Player {
     update() {
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
-        this.velocity.x *= 0.6
+        this.velocity.x *= 0.8
         this.sides.bottom = this.position.y + this.height
         if (this.sides.bottom + this.velocity.y < canvas.height) {
             this.velocity.y++
@@ -38,11 +38,29 @@ class Player {
 }
 
 class Sprite {
-    constructor({position}) {
+    constructor({position, imageSrc}) {
         this.position = position
         this.image = new Image()
+        this.image.onload = () => {
+            console.log('awesome')
+            this.loaded = true
+        }
+        this.image.src = imageSrc
+        this.loaded = false
+    }
+    draw() {
+        if (!this.loaded) return
+        c.drawImage(this.image, this.position.x, this.position.y)
     }
 }
+
+const background = new Sprite({
+    imageSrc: './art/background.png',
+    position: {
+        x: 0,
+        y: 0,
+    },
+})
 
 const player = new Player()
 
@@ -60,18 +78,19 @@ const keys = {
 
 // let bottom = y + 100
 
-
+background.draw()
 
 function animate() {
     window.requestAnimationFrame(animate)
     c.clearRect
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height)
-    player.velocity.x = 0
+    background.draw()
+    //player.velocity.x = 0
     if (keys.d.pressed){
-        player.velocity.x = 5
+        player.velocity.x = 10
     } else if (keys.a.pressed) {
-        player.velocity.x = -5
+        player.velocity.x = -10
     }
     player.update()
     player.draw()
