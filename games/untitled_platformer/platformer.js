@@ -76,8 +76,6 @@ const keys = {
     }
 }
 
-// let bottom = y + 100
-
 background.draw()
 
 function animate() {
