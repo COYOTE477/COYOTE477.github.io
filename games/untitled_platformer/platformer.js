@@ -50,6 +50,9 @@ function animate() {
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height)
     background.draw()
+    collisionBlocks.forEach(CollisionBlock => {
+        CollisionBlock.draw()
+    })
     //player.velocity.x = 0
     if (keys.d.pressed){
         player.velocity.x = 10
