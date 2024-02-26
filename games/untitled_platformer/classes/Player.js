@@ -1,6 +1,6 @@
 class Player extends Sprite{
-    constructor({collisionBlocks = [], imageSrc, frameCount}) {
-        super({ imageSrc, frameCount})
+    constructor({collisionBlocks = [], imageSrc, frameCount, animations}) {
+        super({ imageSrc, frameCount, animations})
         this.position = {
             x: 100,
             y: 100
@@ -18,12 +18,11 @@ class Player extends Sprite{
     }
 
     update() {
-        this.velocity.y++
-        this.sides.bottom = this.position.y + this.height
         this.velocity.x *= 0.8
-        //for somereasn i have to update the y velocity AFTER checking the x velocity btdubs
         this.position.x += this.velocity.x
+        //for somereasn i have to update the y velocity AFTER checking the x velocity btdubs
         this.HorizontalCollision()
+        this.velocity.y++
         this.position.y += this.velocity.y
         this.VerticleCollision()
     }

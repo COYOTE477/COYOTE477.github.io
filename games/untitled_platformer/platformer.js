@@ -24,8 +24,34 @@ const background = new Sprite({
 
 const player = new Player({
     collisionBlocks,
-    imageSrc: './art/player.png',
+    imageSrc: './art/player/idleRight.png',
     frameCount: 3,
+    animations: {
+        idleRight: {
+            frameRate: 3,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: './art/player/idleRight.png',
+        },
+        idleLeft: {
+            frameRate: 3,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: './art/player/idleLeft.png',
+        },
+        runRight: {
+            frameRate: 3,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: './art/player/runRight.png',
+        },
+        runLeft: {
+            frameRate: 3,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: './art/player/runLeftRight.png',
+        }
+    }
 })
 
 const keys = {
