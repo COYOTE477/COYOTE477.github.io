@@ -9,7 +9,9 @@ var delta;
 
 canvas.width = 64 * 16
 canvas.height = 64 * 9
-//thank you chris courses
+//thank you chris courses for the tutorial
+const parsedCollisions = collisionsLevel1.parse2D()
+const collisionBlocks = parsedCollisions.createObjectsFrom2D()
 
 
 const background = new Sprite({
@@ -20,7 +22,9 @@ const background = new Sprite({
     },
 })
 
-const player = new Player()
+const player = new Player({
+    collisionBlocks,
+})
 
 const keys = {
     w: {
@@ -34,7 +38,6 @@ const keys = {
     }
 }
 
-background.draw()
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -47,6 +50,7 @@ function animate() {
 
 
     c.clearRect
+    
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height)
     background.draw()
