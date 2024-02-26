@@ -25,35 +25,48 @@ const background = new Sprite({
 const player = new Player({
     collisionBlocks,
     imageSrc: './art/player/idleRight.png',
-    frameCount: 3,
+    frameCount: 2,
     animations: {
         idleRight: {
-            frameRate: 3,
-            frameBuffer: 2,
+            frameCount: 2,
+            frameBuffer: 10,
             loop: true,
             imageSrc: './art/player/idleRight.png',
         },
         idleLeft: {
-            frameRate: 3,
-            frameBuffer: 2,
+            frameCount: 2,
+            frameBuffer: 10,
             loop: true,
             imageSrc: './art/player/idleLeft.png',
         },
         runRight: {
-            frameRate: 3,
+            frameCount: 2,
             frameBuffer: 2,
             loop: true,
             imageSrc: './art/player/runRight.png',
         },
         runLeft: {
-            frameRate: 3,
+            frameCount: 2,
             frameBuffer: 2,
             loop: true,
-            imageSrc: './art/player/runLeftRight.png',
+            imageSrc: './art/player/runLeft.png',
         }
     }
 })
 
+const doors = [
+    new Sprite({
+        position: {
+            x: 928,
+            y: 192
+        },
+        imageSrc: './art/door/open.png',
+        frameCount:5,
+        frameBuffer: 5,
+        loop: false,
+        autoplay: false
+    })
+]
 const keys = {
     w: {
         pressed: false
@@ -85,11 +98,23 @@ function animate() {
     collisionBlocks.forEach(CollisionBlock => {
         CollisionBlock.draw()
     })
+    doors.forEach(door => {
+        door.draw()
+    })
     //player.velocity.x = 0
     if (keys.d.pressed){
+        player.switchSprite('runRight')
         player.velocity.x = 10
+        player.lastDirection = 'right'
     } else if (keys.a.pressed) {
+        player.switchSprite('runLeft')
         player.velocity.x = -10
+        player.lastDirection = 'left'
+    } else {
+        if (player.lastDirection === 'left'){
+            player.switchSprite('idleLeft')}
+        else player.switchSprite('idleRight')
+
     }
     player.update()
     player.draw()

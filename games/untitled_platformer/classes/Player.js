@@ -27,6 +27,15 @@ class Player extends Sprite{
         this.VerticleCollision()
     }
 
+    switchSprite(name) {
+        if (this.image === this.animations[name].image) return
+        this.currentFrame = 0
+        this.image = this.animations[name].image
+        this.frameCount = this.animations[name].frameCount
+        this.frameBuffer = this.animations[name].frameBuffer
+        this.loop = this.animations[name].loop
+    }
+
     VerticleCollision(){
         for (let i = 0; i < this.collisionBlocks.length; i++){
             const collisionBlock = this.collisionBlocks[i]

@@ -8,8 +8,8 @@ parsedCollisions.forEach((row, y) => {
             collisionBlocks.push(
                 new CollisionBlock({
                     position: {
-                        x: x * 64,
-                        y: y * 64,
+                        x: x * 32,
+                        y: y * 32,
                     }
                 })
             )

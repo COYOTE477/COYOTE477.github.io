@@ -1,5 +1,5 @@
 class Sprite {
-    constructor({position, imageSrc, frameCount = 1, animations }) {
+    constructor({position, imageSrc, frameCount = 1, autoplay = true, loop, animations, frameBuffer = 2 }) {
         this.position = position
         this.image = new Image()
         this.image.onload = () => {
@@ -16,9 +16,10 @@ class Sprite {
         this.frameCount = frameCount
         this.currentFrame = 0
         this.elapsedFrames = 0
-        this.frameBuffer = 10
-        this.loop = true
+        this.frameBuffer = frameBuffer
+        this.loop = loop
         this.animations = animations
+        this.autoplay = autoplay
         if (this.animations) {
             for(let key in this.animations) {
                 const image = new Image()
@@ -52,6 +53,7 @@ class Sprite {
     }
 
     updateFrames() {
+        if (!this.autoplay) return
         this.elapsedFrames++
         if (this.elapsedFrames % this.frameBuffer === 0){
             if (this.currentFrame < this.frameCount - 1) this.currentFrame++
