@@ -1,6 +1,6 @@
 class Player extends Sprite{
-    constructor({collisionBlocks = [], imageSrc}) {
-        super({ imageSrc })
+    constructor({collisionBlocks = [], imageSrc, frameCount}) {
+        super({ imageSrc, frameCount})
         this.position = {
             x: 100,
             y: 100

@@ -24,7 +24,8 @@ const background = new Sprite({
 
 const player = new Player({
     collisionBlocks,
-    imageSrc: './art/player.png'
+    imageSrc: './art/player.png',
+    frameCount: 3,
 })
 
 const keys = {
