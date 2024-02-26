@@ -24,6 +24,7 @@ const background = new Sprite({
 
 const player = new Player({
     collisionBlocks,
+    imageSrc: './art/player.png'
 })
 
 const keys = {
