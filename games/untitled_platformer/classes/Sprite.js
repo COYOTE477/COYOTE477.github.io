@@ -20,6 +20,8 @@ class Sprite {
         this.loop = loop
         this.animations = animations
         this.autoplay = autoplay
+        this.currentAnimation
+
         if (this.animations) {
             for(let key in this.animations) {
                 const image = new Image()
@@ -52,12 +54,23 @@ class Sprite {
         this.updateFrames()
     }
 
+    play() {
+        this.autoplay = true
+    }
+
     updateFrames() {
         if (!this.autoplay) return
         this.elapsedFrames++
         if (this.elapsedFrames % this.frameBuffer === 0){
             if (this.currentFrame < this.frameCount - 1) this.currentFrame++
                 else if (this.loop === true) this.currentFrame = 0
+        }
+
+        if (this.currentAnimation?.onComplete) {
+            if (this.currentFrame === this.frameCount - 1 && !this.currentAnimation.isActive) {
+                this.currentAnimation.onComplete()
+                this.currentAnimation.isActive = true
+            }
         }
     }
 }

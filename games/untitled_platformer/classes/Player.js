@@ -27,6 +27,24 @@ class Player extends Sprite{
         this.VerticleCollision()
     }
 
+    handleInput(keys) {
+    if (this.preventInput) return
+    if (keys.d.pressed){
+        this.switchSprite('runRight')
+        this.velocity.x = 10
+        this.lastDirection = 'right'
+    } else if (keys.a.pressed) {
+        this.switchSprite('runLeft')
+        this.velocity.x = -10
+        this.lastDirection = 'left'
+    } else {
+        if (this.lastDirection === 'left'){
+            this.switchSprite('idleLeft')}
+        else this.switchSprite('idleRight')
+
+    }
+    }
+
     switchSprite(name) {
         if (this.image === this.animations[name].image) return
         this.currentFrame = 0
@@ -34,6 +52,7 @@ class Player extends Sprite{
         this.frameCount = this.animations[name].frameCount
         this.frameBuffer = this.animations[name].frameBuffer
         this.loop = this.animations[name].loop
+        this.currentAnimation = this.animations[name]
     }
 
     VerticleCollision(){
