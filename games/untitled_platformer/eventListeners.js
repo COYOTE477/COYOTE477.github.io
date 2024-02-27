@@ -17,8 +17,6 @@ window.addEventListener('keydown', (event) => {
                     door.play()
                 }
             }
-
-
             break
         case 'a':
             keys.a.pressed = true
@@ -28,10 +26,25 @@ window.addEventListener('keydown', (event) => {
             keys.d.pressed = true
 
             break
+        case 'ArrowUp':
+            keys.w.pressed = true
+
+            break
+        case 'ArrowLeft':
+            keys.a.pressed = true
+
+            break
+        case 'ArrowRight':
+            keys.d.pressed = true
+
+            break
+        case ' ':
+            keys.w.pressed = true
     }
 })
 
 window.addEventListener('keyup', (event) => {
+    console.log(event.key);
     switch (event.key) {
         case 'w':
             keys.w.pressed = false
@@ -45,5 +58,19 @@ window.addEventListener('keyup', (event) => {
             keys.d.pressed = false
 
             break
+        case 'ArrowUp':
+            keys.w.pressed = false
+
+            break
+        case 'ArrowLeft':
+            keys.a.pressed = false
+
+            break
+        case 'ArrowRight':
+            keys.d.pressed = false
+
+            break
+        case ' ':
+            keys.w.pressed = false
     }
 })

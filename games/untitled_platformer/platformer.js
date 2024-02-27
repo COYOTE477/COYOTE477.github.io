@@ -1,11 +1,11 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-let fps = 60;
-let now;
-let then = Date.now();
-let interval = 1000/fps;
-let delta;
+var fps = 60;
+var now;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
 let backgroundscroll = 20
 
 canvas.width = 64 * 16
@@ -189,7 +189,12 @@ function animate() {
         door.draw()
     })
 
-
+    window.addEventListener(" resize", function (){
+        let canvas = document.getElementById(" #canvas");
+        canvas.style.width = window.innerWidth;
+        
+        canvas.style.height = window.innerHeight;
+        })
     //player.velocity.x = 0
     player.handleInput(keys)
     player.update()
