@@ -6,6 +6,7 @@ var now;
 var then = Date.now();
 var interval = 1000/fps;
 var delta;
+let backgroundscroll = 0
 
 canvas.width = 64 * 16
 canvas.height = 64 * 9
@@ -13,6 +14,7 @@ canvas.height = 64 * 9
 let parsedCollisions
 let collisionBlocks
 let background
+let map
 let doors
 
 let level = 1
@@ -26,7 +28,15 @@ let levels = {
             player.collisionBlocks = collisionBlocks
 
             background = new Sprite({
-                imageSrc: './art/background.png',
+                imageSrc: './art/levels/backgroundtemplate.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level1.png',
                 position: {
                     x: 0,
                     y: 0,
@@ -56,10 +66,18 @@ let levels = {
             player.position.y = 96
             player.collisionBlocks = collisionBlocks
 
-            if (player.currentAnimation) player.currentAnimation = false
+            if (player.currentAnimation) player.currentAnimation.isActive = false
 
             background = new Sprite({
-                imageSrc: './art/background.png',
+                imageSrc: './art/levels/backgroundtemplate.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level2.png',
                 position: {
                     x: 0,
                     y: 0,
@@ -161,6 +179,7 @@ function animate() {
     then = now - (delta % interval);    
     
     background.draw()
+    map.draw()
     collisionBlocks.forEach(CollisionBlock => {
         CollisionBlock.draw()
     })
