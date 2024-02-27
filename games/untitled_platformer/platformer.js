@@ -17,7 +17,7 @@ let background
 let map
 let doors
 
-let level = 1
+let level = 3
 let levels = {
     1: {
         init: () => {
@@ -128,8 +128,8 @@ let levels = {
             doors = [
                 new Sprite({
                     position: {
-                        x: 64,
-                        y: 384
+                        x: 32,
+                        y: 352
                     },
                     imageSrc: './art/door/open.png',
                     frameCount:5,
