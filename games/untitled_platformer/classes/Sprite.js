@@ -3,7 +3,6 @@ class Sprite {
         this.position = position
         this.image = new Image()
         this.image.onload = () => {
-            console.log('awesome')
             this.loaded = true
             this.width = this.image.width / this.frameCount
             this.height = this.image.height

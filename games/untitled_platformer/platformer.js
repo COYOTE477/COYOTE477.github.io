@@ -21,7 +21,8 @@ let levels = {
         init: () => {
             parsedCollisions = collisionsLevel1.parse2D()
             collisionBlocks = parsedCollisions.createObjectsFrom2D()
-
+            player.position.x = 64
+            player.position.y = 396
             player.collisionBlocks = collisionBlocks
 
             background = new Sprite({
@@ -37,6 +38,39 @@ let levels = {
                     position: {
                         x: 928,
                         y: 192
+                    },
+                    imageSrc: './art/door/open.png',
+                    frameCount:5,
+                    frameBuffer: 5,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
+    },
+    2: {
+        init: () => {
+            parsedCollisions = collisionsLevel2.parse2D()
+            collisionBlocks = parsedCollisions.createObjectsFrom2D()
+            player.position.x = 64
+            player.position.y = 96
+            player.collisionBlocks = collisionBlocks
+
+            if (player.currentAnimation) player.currentAnimation = false
+
+            background = new Sprite({
+                imageSrc: './art/background.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+            
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 928,
+                        y: 160
                     },
                     imageSrc: './art/door/open.png',
                     frameCount:5,
@@ -89,11 +123,16 @@ const player = new Player({
                     opacity: 1,
                     onComplete: () => {
                         level++
-                        levels[level].init()
+                        levels[level].init(),
+                        player.switchSprite('idleRight')
+                        player.preventInput = false
+                        gsap.to(overlay, {
+                            opacity: 0
+                        })
                     }
                 })
-            }
-        }
+            },
+        },
     }
 })
 

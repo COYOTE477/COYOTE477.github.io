@@ -24,6 +24,17 @@ class Player extends Sprite{
         this.HorizontalCollision()
         this.velocity.y++
         this.position.y += this.velocity.y
+
+        this.hitbox = {
+            position: {
+                x: this.position.x+4,
+                y: this.position.y+1,
+            },
+            width: 24,
+            height: 30,
+        }
+        c.fillStyle = 'rgba(0,100,0,0.2)'
+        c.fillRect(this.hitbox.position.x,this.hitbox.position.y,this.hitbox.width,this.hitbox.height)
         this.VerticleCollision()
     }
 
