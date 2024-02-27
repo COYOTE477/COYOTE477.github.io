@@ -98,6 +98,47 @@ let levels = {
                 })
             ]
         }
+    },
+    3: {
+        init: () => {
+            parsedCollisions = collisionsLevel3.parse2D()
+            collisionBlocks = parsedCollisions.createObjectsFrom2D()
+            player.position.x = 64
+            player.position.y = 512
+            player.collisionBlocks = collisionBlocks
+
+            if (player.currentAnimation) player.currentAnimation.isActive = false
+
+            background = new Sprite({
+                imageSrc: './art/levels/backgroundtemplate.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level3.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+            
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 64,
+                        y: 384
+                    },
+                    imageSrc: './art/door/open.png',
+                    frameCount:5,
+                    frameBuffer: 5,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
     }
 }
 
@@ -189,12 +230,7 @@ function animate() {
         door.draw()
     })
 
-    window.addEventListener(" resize", function (){
-        let canvas = document.getElementById(" #canvas");
-        canvas.style.width = window.innerWidth;
-        
-        canvas.style.height = window.innerHeight;
-        })
+    
     //player.velocity.x = 0
     player.handleInput(keys)
     player.update()
