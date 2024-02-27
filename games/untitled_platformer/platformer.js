@@ -1,12 +1,12 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-var fps = 60;
-var now;
-var then = Date.now();
-var interval = 1000/fps;
-var delta;
-let backgroundscroll = 0
+let fps = 60;
+let now;
+let then = Date.now();
+let interval = 1000/fps;
+let delta;
+let backgroundscroll = 20
 
 canvas.width = 64 * 16
 canvas.height = 64 * 9
@@ -178,6 +178,8 @@ function animate() {
 	if (delta > interval) {
     then = now - (delta % interval);    
     
+    if (background.position.x < -8192) background.position.x = 0
+    background.position.x = background.position.x - 1
     background.draw()
     map.draw()
     collisionBlocks.forEach(CollisionBlock => {
@@ -186,6 +188,8 @@ function animate() {
     doors.forEach(door => {
         door.draw()
     })
+
+
     //player.velocity.x = 0
     player.handleInput(keys)
     player.update()
