@@ -1,10 +1,10 @@
 
 //board
 let board;
-let boardWidth = 360;
-let boardHeight = 640;
+let boardWidth = window.innerWidth-10;
+let boardHeight = window.innerHeight-10;
 let context;
-
+document.documentElement.style.overflow = 'hidden';
 //bird
 let birdWidth = 34; // lets hmm.. make the bird..
 let birdHeight = 24;
@@ -21,7 +21,7 @@ let bird = {
 //pipes
 let pipeArray = [];
 let pipeWidth = 64; //how about... the pipes!!
-let pipeHeight = 512;
+let pipeHeight = boardHeight;
 let pipeX = boardWidth;
 let pipeY = 0;
 
@@ -38,8 +38,8 @@ let score = 0;
 
 window.onload = function() {
     board = document.getElementById("board");
-    board.height = boardHeight;
-    board.width = boardWidth;
+    board.height = boardHeight
+    board.width = boardWidth
     context = board.getContext("2d");
 
     //draw flappy bird
@@ -89,6 +89,8 @@ function update() {
         if (!pipe.passed && bird.x > pipe.x + pipe.width) {
             score += 0.5; // lets do 0.5 for each pipe i know there is a better way to do this but im not going to
             pipe.passed = true;
+            velocityX = -2 - score/30
+            console.log(velocityX)
         }
 
         if (detectCollision(bird, pipe)) {

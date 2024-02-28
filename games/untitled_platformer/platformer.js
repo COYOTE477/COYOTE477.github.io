@@ -7,7 +7,7 @@ var then = Date.now();
 var interval = 1000/fps;
 var delta;
 let backgroundscroll = 20
-
+document.documentElement.style.overflow = 'hidden';
 canvas.width = 64 * 16
 canvas.height = 64 * 9
 //thank you chris courses for the tutorial
@@ -139,7 +139,48 @@ let levels = {
                 })
             ]
         }
-    }
+    },
+    4: {
+        init: () => {
+            parsedCollisions = collisionsLevel4.parse2D()
+            collisionBlocks = parsedCollisions.createObjectsFrom2D()
+            player.position.x = 64
+            player.position.y = 288
+            player.collisionBlocks = collisionBlocks
+
+            if (player.currentAnimation) player.currentAnimation.isActive = false
+
+            background = new Sprite({
+                imageSrc: './art/levels/backgroundtemplate.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level4.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+            
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 928,
+                        y: 256
+                    },
+                    imageSrc: './art/door/open.png',
+                    frameCount:5,
+                    frameBuffer: 5,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
+    },
 }
 
 const player = new Player({

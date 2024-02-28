@@ -26,8 +26,12 @@ window.addEventListener('keydown', (event) => {
             break
         case 'd':
             keys.d.pressed = true
-
             break
+
+        case 'r':
+            levels[level].init()
+            break
+            
         case 'ArrowUp':
             keys.w.pressed = true
             if (player.velocity.y === 0) player.velocity.y = -15
