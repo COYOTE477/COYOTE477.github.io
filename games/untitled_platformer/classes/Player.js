@@ -64,7 +64,6 @@ class Player extends Sprite{
     }
 
     interact() {
-        console.log('interacted')
         for (let i = 0; i < doors.length; i++) {
             const door = doors[i]
             if (this.hitbox.position.x + this.hitbox.width <= door.position.x + door.width &&
@@ -79,6 +78,7 @@ class Player extends Sprite{
                 door.play()
             }
         }
+        if (npcs) {
         for (let i = 0; i < npcs.length; i++) {
             const npc = npcs[i]
             if (this.hitbox.position.x <= npc.position.x + npc.width &&
@@ -92,8 +92,9 @@ class Player extends Sprite{
                 if (this.lastDirection === 'left'){
                     this.switchSprite('idleLeft')}
                 else this.switchSprite('idleRight')
+                talking = true
             }
-        }
+        }}
     }
 
     switchSprite(name) {

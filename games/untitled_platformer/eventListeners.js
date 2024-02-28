@@ -5,7 +5,10 @@ window.addEventListener('keydown', (event) => {
         
             break
         case 'e':
-            keys.e.pressed = true
+            level++
+            talking = false
+            levels[level].init()
+            player.preventInput = false
         
             break
         case 'a':
@@ -19,6 +22,7 @@ window.addEventListener('keydown', (event) => {
         case 'r':
             levels[level].init()
             player.preventInput = false
+            talking = false
             break
             
         case 'ArrowUp':

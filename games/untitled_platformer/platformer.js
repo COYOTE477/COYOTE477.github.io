@@ -16,8 +16,9 @@ let collisionBlocks
 let background
 let map
 let doors
+let npcs
 
-let level = 5
+let level = 1
 let levels = {
     1: {
         init: () => {
@@ -208,15 +209,29 @@ let levels = {
             })
             
             npcs = [
-                new Sprite({
+                new Npc({
                     position: {
                         x: 480,
                         y: 352
                     },
-                    imageSrc: './art/NPC/crocodile/idle.png',
+                    imageSrc: './art/NPC/crocodile/idleRight.png',
                     frameCount:2,
                     frameBuffer: 20,
-                    loop: true,
+                    dialog: "hi",
+                    animations: {
+                        idleRight: {
+                            frameCount: 2,
+                            frameBuffer: 10,
+                            loop: true,
+                            imageSrc: './art/NPC/crocodile/idleRight.png',
+                        },
+                        idleLeft: {
+                            frameCount: 2,
+                            frameBuffer: 10,
+                            loop: true, 
+                            imageSrc: './art/NPC/crocodile/idleLeft.png',
+                        }
+                    }
                 })
             ]
 
@@ -309,6 +324,8 @@ const overlay = {
     opacity: 0
 }
 
+let talking = false
+
 function animate() {
     window.requestAnimationFrame(animate)
 
@@ -327,9 +344,11 @@ function animate() {
     doors.forEach(door => {
         door.draw()
     })
-    npcs.forEach(door => {
-        door.draw()
-    })
+    if (npcs) {
+    npcs.forEach(npc => {
+        npc.update(talking)
+        npc.draw()
+    })}
     //player.velocity.x = 0
     player.handleInput(keys)
     player.update()
