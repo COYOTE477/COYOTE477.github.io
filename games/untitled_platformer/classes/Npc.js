@@ -3,17 +3,29 @@ class Npc extends Sprite{
         super({ imageSrc, frameCount, animations, position})
         this.position = position
         this.dialog = dialog
+        this.dialogNumber = 0
+        this.dialogDone = false
     }
-    update(talking) {
+    update() {
+        if (this.dialogDone) player.preventInput = true
         if (talking){
             c.fillStyle = 'black'
             c.fillRect(160,416,704,128)
             c.fillStyle = 'white'
-            c.fillText(this.dialog, 200, 480)
+            c.font="45px sans-serif";
+            c.fillText(this.dialog[this.dialogNumber], 200, 480)
         }
         if (player.position.x > this.position.x) {
             this.switchSprite('idleRight')
          } else {this.switchSprite('idleLeft')}
+    }
+
+    updateDialog() {
+        console.log(this.dialog.length, talking, this.dialogNumber)
+        if (this.dialogNumber >= this.dialog.length-1) {
+            talking = false
+            this.dialogDone = true
+        } else this.dialogNumber++
     }
 
     switchSprite(name) {

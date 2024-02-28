@@ -20,7 +20,7 @@ class Player extends Sprite{
     update() {
         this.velocity.x *= 0.4
         this.position.x += this.velocity.x
-        //for somereasn i have to update the y velocity AFTER checking the x velocity btdubs
+        //for somereasn i have to update the y velocity AFTER checking the x velocity b t dubs
         this.updateHitbox()
         this.HorizontalCollision()
         this.velocity.y++
@@ -41,8 +41,20 @@ class Player extends Sprite{
     }
 
     handleInput(keys) {
+    if (keys.w.pressed){
+        if (talking === true && this.pressed === true) {
+            if (npcs) {
+                npcs.forEach(npc => {
+                    npc.updateDialog()
+                })}
+        }   
+        this.pressed = false
+        console.log(talking)
+        if (!this.preventInput && this.velocity.y === 0 && this.onGround === true) this.velocity.y = -15
+        
+        this.interact()
+    } else this.pressed = true
     if (this.preventInput) return
-    
     if (keys.d.pressed){
         this.switchSprite('runRight')
         this.velocity.x += 10
@@ -56,10 +68,7 @@ class Player extends Sprite{
             this.switchSprite('idleLeft')}
         else this.switchSprite('idleRight')
     }
-    if (keys.w.pressed){
-        if (this.velocity.y === 0 && this.onGround === true) this.velocity.y = -15
-        this.interact()
-    }
+    
     if (keys.e.pressed) {}
     }
 
@@ -81,20 +90,23 @@ class Player extends Sprite{
         if (npcs) {
         for (let i = 0; i < npcs.length; i++) {
             const npc = npcs[i]
-            if (this.hitbox.position.x <= npc.position.x + npc.width &&
-                this.hitbox.position.x + this.hitbox.width >= npc.position.x &&
-                this.hitbox.position.y + this.hitbox.height >= npc.position.y &&
-                this.hitbox.position.y <= npc.position.y + npc.width
-            ) {
-                this.velocity.x = 0
-                this.velocity.y = 0
-                this.preventInput = true
-                if (this.lastDirection === 'left'){
-                    this.switchSprite('idleLeft')}
-                else this.switchSprite('idleRight')
-                talking = true
+            if (!npc.dialogDone) {
+                if (this.hitbox.position.x <= npc.position.x + npc.width &&
+                    this.hitbox.position.x + this.hitbox.width >= npc.position.x &&
+                    this.hitbox.position.y + this.hitbox.height >= npc.position.y &&
+                    this.hitbox.position.y <= npc.position.y + npc.width
+                ) {
+                    this.velocity.x = 0
+                    this.velocity.y = 0
+                    this.preventInput = true
+                    talking = true
+                    if (this.lastDirection === 'left'){
+                        this.switchSprite('idleLeft')}
+                    else this.switchSprite('idleRight')
+                    }
+                } else talking = false
             }
-        }}
+        }
     }
 
     switchSprite(name) {

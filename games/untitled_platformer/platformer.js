@@ -17,6 +17,7 @@ let background
 let map
 let doors
 let npcs
+let talking = false
 
 let level = 1
 let levels = {
@@ -217,7 +218,7 @@ let levels = {
                     imageSrc: './art/NPC/crocodile/idleRight.png',
                     frameCount:2,
                     frameBuffer: 20,
-                    dialog: "hi",
+                    dialog: ["hi", "my name is crocodile"],
                     animations: {
                         idleRight: {
                             frameCount: 2,
@@ -324,7 +325,6 @@ const overlay = {
     opacity: 0
 }
 
-let talking = false
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -346,7 +346,7 @@ function animate() {
     })
     if (npcs) {
     npcs.forEach(npc => {
-        npc.update(talking)
+        npc.update()
         npc.draw()
     })}
     //player.velocity.x = 0
