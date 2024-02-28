@@ -18,7 +18,7 @@ class Player extends Sprite{
     }
 
     update() {
-        this.velocity.x *= 0.8
+        this.velocity.x *= 0.4
         this.position.x += this.velocity.x
         //for somereasn i have to update the y velocity AFTER checking the x velocity btdubs
         this.updateHitbox()
@@ -44,11 +44,11 @@ class Player extends Sprite{
     if (this.preventInput) return
     if (keys.d.pressed){
         this.switchSprite('runRight')
-        this.velocity.x = 8
+        this.velocity.x += 10
         this.lastDirection = 'right'
     } else if (keys.a.pressed) {
         this.switchSprite('runLeft')
-        this.velocity.x = -8
+        this.velocity.x += -10
         this.lastDirection = 'left'
     } else {
         if (this.lastDirection === 'left'){
@@ -77,6 +77,7 @@ class Player extends Sprite{
                 this.hitbox.position.y + this.hitbox.height >= collisionBlock.position.y &&
                 this.hitbox.position.y <= collisionBlock.position.y + collisionBlock.width
             ) {
+                this.onGround = true
                 if (this.velocity.y < 0) {
                     this.velocity.y = 0
                     const offset = this.hitbox.position.y - this.position.y
@@ -91,7 +92,7 @@ class Player extends Sprite{
                     collisionBlock.position.y - offset - 0.01
                     break
                 }
-            }
+            } else this.onGround = false
         }
     }
 

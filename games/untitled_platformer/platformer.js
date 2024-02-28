@@ -17,7 +17,7 @@ let background
 let map
 let doors
 
-let level = 3
+let level = 1
 let levels = {
     1: {
         init: () => {
