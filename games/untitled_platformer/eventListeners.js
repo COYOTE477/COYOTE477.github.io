@@ -1,24 +1,12 @@
 window.addEventListener('keydown', (event) => {
-    
-    console.log(event.key);
     switch (event.key) {
         case 'w':
-            if (player.velocity.y === 0 && player.onGround === true) player.velocity.y = -15
-            for (let i = 0; i < doors.length; i++) {
-                const door = doors[i]
-
-                if (player.hitbox.position.x + player.hitbox.width <= door.position.x + door.width &&
-                    player.hitbox.position.x >= door.position.x &&
-                    player.position.y >= door.position.y &&
-                    player.position.y + player.height  <= door.position.y + door.width
-                ) {
-                    player.velocity.x = 0
-                    player.velocity.y = 0
-                    player.preventInput = true
-                    player.switchSprite('EnterDoor')
-                    door.play()
-                }
-            }
+            keys.w.pressed = true
+        
+            break
+        case 'e':
+            keys.e.pressed = true
+        
             break
         case 'a':
             keys.a.pressed = true
@@ -30,26 +18,12 @@ window.addEventListener('keydown', (event) => {
 
         case 'r':
             levels[level].init()
+            player.preventInput = false
             break
             
         case 'ArrowUp':
             keys.w.pressed = true
-            if (player.velocity.y === 0) player.velocity.y = -15
-            for (let i = 0; i < doors.length; i++) {
-                const door = doors[i]
-
-                if (player.position.x + player.width <= door.position.x + door.width &&
-                    player.position.x >= door.position.x &&
-                    player.position.y >= door.position.y &&
-                    player.position.y + player.height  <= door.position.y + door.width
-                ) {
-                    player.velocity.x = 0
-                    player.velocity.y = 0
-                    player.preventInput = true
-                    player.switchSprite('EnterDoor')
-                    door.play()
-                }
-            }
+            
             break
 
             break
@@ -75,6 +49,10 @@ window.addEventListener('keyup', (event) => {
         case 'a':
             keys.a.pressed = false
 
+            break
+        case 'e':
+            keys.e.pressed = false
+        
             break
         case 'd':
             keys.d.pressed = false

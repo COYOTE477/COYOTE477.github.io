@@ -42,6 +42,7 @@ class Player extends Sprite{
 
     handleInput(keys) {
     if (this.preventInput) return
+    
     if (keys.d.pressed){
         this.switchSprite('runRight')
         this.velocity.x += 10
@@ -54,8 +55,45 @@ class Player extends Sprite{
         if (this.lastDirection === 'left'){
             this.switchSprite('idleLeft')}
         else this.switchSprite('idleRight')
-
     }
+    if (keys.w.pressed){
+        if (this.velocity.y === 0 && this.onGround === true) this.velocity.y = -15
+        this.interact()
+    }
+    if (keys.e.pressed) {}
+    }
+
+    interact() {
+        console.log('interacted')
+        for (let i = 0; i < doors.length; i++) {
+            const door = doors[i]
+            if (this.hitbox.position.x + this.hitbox.width <= door.position.x + door.width &&
+                this.hitbox.position.x >= door.position.x &&
+                this.position.y >= door.position.y &&
+                this.position.y + this.height  <= door.position.y + door.width
+            ) {
+                this.velocity.x = 0
+                this.velocity.y = 0
+                this.preventInput = true
+                this.switchSprite('EnterDoor')
+                door.play()
+            }
+        }
+        for (let i = 0; i < npcs.length; i++) {
+            const npc = npcs[i]
+            if (this.hitbox.position.x <= npc.position.x + npc.width &&
+                this.hitbox.position.x + this.hitbox.width >= npc.position.x &&
+                this.hitbox.position.y + this.hitbox.height >= npc.position.y &&
+                this.hitbox.position.y <= npc.position.y + npc.width
+            ) {
+                this.velocity.x = 0
+                this.velocity.y = 0
+                this.preventInput = true
+                if (this.lastDirection === 'left'){
+                    this.switchSprite('idleLeft')}
+                else this.switchSprite('idleRight')
+            }
+        }
     }
 
     switchSprite(name) {
@@ -77,7 +115,6 @@ class Player extends Sprite{
                 this.hitbox.position.y + this.hitbox.height >= collisionBlock.position.y &&
                 this.hitbox.position.y <= collisionBlock.position.y + collisionBlock.width
             ) {
-                this.onGround = true
                 if (this.velocity.y < 0) {
                     this.velocity.y = 0
                     const offset = this.hitbox.position.y - this.position.y
@@ -87,6 +124,7 @@ class Player extends Sprite{
                 }
                 if (this.velocity.y > 0) {
                     this.velocity.y = 0
+                    this.onGround = true
                     const offset = this.hitbox.position.y - this.position.y + this.hitbox.height
                     this.position.y = 
                     collisionBlock.position.y - offset - 0.01

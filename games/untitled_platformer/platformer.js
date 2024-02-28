@@ -17,7 +17,7 @@ let background
 let map
 let doors
 
-let level = 1
+let level = 5
 let levels = {
     1: {
         init: () => {
@@ -181,6 +181,60 @@ let levels = {
             ]
         }
     },
+    5: {
+        init: () => {
+            parsedCollisions = collisionsLevel5.parse2D()
+            collisionBlocks = parsedCollisions.createObjectsFrom2D()
+            player.position.x = 160
+            player.position.y = 352
+            player.collisionBlocks = collisionBlocks
+
+            if (player.currentAnimation) player.currentAnimation.isActive = false
+
+            background = new Sprite({
+                imageSrc: './art/levels/backgroundtemplate.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level5.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+            
+            npcs = [
+                new Sprite({
+                    position: {
+                        x: 480,
+                        y: 352
+                    },
+                    imageSrc: './art/NPC/crocodile/idle.png',
+                    frameCount:2,
+                    frameBuffer: 20,
+                    loop: true,
+                })
+            ]
+
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 800,
+                        y: 320
+                    },
+                    imageSrc: './art/door/open.png',
+                    frameCount:5,
+                    frameBuffer: 5,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
+    },
 }
 
 const player = new Player({
@@ -245,7 +299,10 @@ const keys = {
     },
     d: {
         pressed: false
-    }
+    },
+    e: {
+        pressed: false
+    },
 }
 
 const overlay = {
@@ -270,8 +327,9 @@ function animate() {
     doors.forEach(door => {
         door.draw()
     })
-
-    
+    npcs.forEach(door => {
+        door.draw()
+    })
     //player.velocity.x = 0
     player.handleInput(keys)
     player.update()
