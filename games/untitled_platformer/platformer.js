@@ -315,19 +315,19 @@ let levels = {
                         y: 256
                     },
                     imageSrc: './art/NPC/traveler/idleRight.png',
-                    frameCount:2,
-                    frameBuffer: 20,
-                    dialog: ["are we on neptune", "yeah"],
-                    characters: [2, 0],
+                    frameCount:4,
+                    frameBuffer: 10,
+                    dialog: ["are we on neptune", "yeah", "thank you", "what is your name.", "crug", "damn..."],
+                    characters: [2, 0, 2, 0, 2, 0],
                     animations: {
                         idleRight: {
-                            frameCount: 2,
+                            frameCount: 4,
                             frameBuffer: 10,
                             loop: true,
                             imageSrc: './art/NPC/traveler/idleRight.png',
                         },
                         idleLeft: {
-                            frameCount: 2,
+                            frameCount: 4,
                             frameBuffer: 10,
                             loop: true, 
                             imageSrc: './art/NPC/traveler/idleLeft.png',
@@ -342,7 +342,7 @@ let levels = {
                         x: 0,
                         y: 352
                     },
-                    imageSrc: './art/door/open.png',
+                    imageSrc: './art/door/openneptune.png',
                     frameCount:5,
                     frameBuffer: 5,
                     loop: false,
