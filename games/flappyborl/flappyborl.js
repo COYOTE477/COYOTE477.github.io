@@ -64,7 +64,7 @@ function update() {
     }
     context.clearRect(0, 0, board.width, board.height);
 
-    velocityX = -2 - score
+    if (velocityX % 4) velocityX = 2 - score/4
     context.fillStyle = "green";
     context.fillRect(bird.x, bird.y, bird.width, bird.height);
 
