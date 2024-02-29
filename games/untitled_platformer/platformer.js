@@ -18,7 +18,26 @@ let map
 let doors
 let npcs
 let talking = false
-
+let faces = [new Sprite({
+    imageSrc: './art/faces/player.png',
+    position: {
+        x: 160,
+        y: 416,
+    },
+    frameCount:2,
+    frameBuffer: 5,
+    loop: true,
+}),
+new Sprite({
+    imageSrc: './art/faces/crocodile.png',
+    position: {
+        x: 160,
+        y: 416,
+    },
+    frameCount:2,
+    frameBuffer: 5,
+    loop: true,
+})]
 let level = 1
 let levels = {
     1: {
@@ -218,7 +237,8 @@ let levels = {
                     imageSrc: './art/NPC/crocodile/idleRight.png',
                     frameCount:2,
                     frameBuffer: 20,
-                    dialog: ["hi", "my name is crocodile"],
+                    dialog: ["hi,", "hi", "my name is crocodile.", "you have made it pretty far!", "appreciate that man.", "btw, dont expect a lot.", "this is just a demo."],
+                    characters: [0, 1, 1, 1, 1, 1, 1],
                     animations: {
                         idleRight: {
                             frameCount: 2,
