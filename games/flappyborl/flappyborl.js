@@ -64,6 +64,7 @@ function update() {
     }
     context.clearRect(0, 0, board.width, board.height);
 
+    velocityX = -2 - score
     context.fillStyle = "green";
     context.fillRect(bird.x, bird.y, bird.width, bird.height);
 
@@ -89,7 +90,6 @@ function update() {
         if (!pipe.passed && bird.x > pipe.x + pipe.width) {
             score += 0.5; // lets do 0.5 for each pipe i know there is a better way to do this but im not going to
             pipe.passed = true;
-            velocityX = -2 - score/30
             console.log(velocityX)
         }
 

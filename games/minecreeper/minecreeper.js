@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let mines = 10;
     let fail = false;
     let flagsleft = mines;
-    document.documentElement.style.overflow = 'hidden';
     restartButton.addEventListener('click', function() {
         restartGame();
         drawBoard(board, ctx, cellSize); // restarts board after you press the restart button
