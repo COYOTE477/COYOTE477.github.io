@@ -18,26 +18,37 @@ let map
 let doors
 let npcs
 let talking = false
-let faces = [new Sprite({
-    imageSrc: './art/faces/player.png',
-    position: {
-        x: 160,
-        y: 416,
-    },
-    frameCount:2,
-    frameBuffer: 5,
-    loop: true,
-}),
-new Sprite({
-    imageSrc: './art/faces/crocodile.png',
-    position: {
-        x: 160,
-        y: 416,
-    },
-    frameCount:2,
-    frameBuffer: 5,
-    loop: true,
-})]
+let faces = [
+    new Sprite({
+        imageSrc: './art/faces/player.png',
+        position: {
+            x: 160,
+            y: 416,
+        },
+        frameCount:2,
+        frameBuffer: 5,
+        loop: true,
+    }),
+    new Sprite({
+        imageSrc: './art/faces/crocodile.png',
+        position: {
+            x: 160,
+            y: 416,
+        },
+        frameCount:2,
+        frameBuffer: 5,
+        loop: true,
+    }),
+    new Sprite({
+        imageSrc: './art/faces/traveler.png',
+        position: {
+            x: 160,
+            y: 416,
+        },
+        frameCount:2,
+        frameBuffer: 2,
+        loop: true,
+    }),]
 let level = 1
 let levels = {
     1: {
@@ -261,6 +272,75 @@ let levels = {
                     position: {
                         x: 800,
                         y: 320
+                    },
+                    imageSrc: './art/door/open.png',
+                    frameCount:5,
+                    frameBuffer: 5,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
+    },
+    6: {
+        init: () => {
+            parsedCollisions = collisionsLevel6.parse2D()
+            collisionBlocks = parsedCollisions.createObjectsFrom2D()
+            player.position.x = 32
+            player.position.y = 96
+            player.collisionBlocks = collisionBlocks
+
+            if (player.currentAnimation) player.currentAnimation.isActive = false
+
+            background = new Sprite({
+                imageSrc: './art/levels/backgroundneptune.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level6.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+            
+            npcs = [
+                new Npc({
+                    position: {
+                        x: 448,
+                        y: 256
+                    },
+                    imageSrc: './art/NPC/traveler/idleRight.png',
+                    frameCount:2,
+                    frameBuffer: 20,
+                    dialog: ["are we on neptune", "yeah"],
+                    characters: [2, 0],
+                    animations: {
+                        idleRight: {
+                            frameCount: 2,
+                            frameBuffer: 10,
+                            loop: true,
+                            imageSrc: './art/NPC/traveler/idleRight.png',
+                        },
+                        idleLeft: {
+                            frameCount: 2,
+                            frameBuffer: 10,
+                            loop: true, 
+                            imageSrc: './art/NPC/traveler/idleLeft.png',
+                        }
+                    }
+                })
+            ]
+
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 0,
+                        y: 352
                     },
                     imageSrc: './art/door/open.png',
                     frameCount:5,

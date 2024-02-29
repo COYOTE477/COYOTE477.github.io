@@ -5,7 +5,7 @@ window.addEventListener('keydown', (event) => {
             keys.w.pressed = true
         
             break
-        case 'e':
+        case 'h':
             level++
             talking = false
             levels[level].init()
