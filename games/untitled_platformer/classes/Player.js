@@ -15,10 +15,12 @@ class Player extends Sprite{
 
         this.collisionBlocks = collisionBlocks
         console.log(this.collisionBlocks)
+        this.friction = 0.4
+        this.acceleration = 10
     }
 
     update() {
-        this.velocity.x *= 0.4
+        this.velocity.x *= this.friction
         this.position.x += this.velocity.x
         //for somereasn i have to update the y velocity AFTER checking the x velocity b t dubs
         this.updateHitbox()
@@ -57,11 +59,11 @@ class Player extends Sprite{
     if (this.preventInput) return
     if (keys.d.pressed){
         this.switchSprite('runRight')
-        this.velocity.x += 10
+        this.velocity.x += this.acceleration
         this.lastDirection = 'right'
     } else if (keys.a.pressed) {
         this.switchSprite('runLeft')
-        this.velocity.x += -10
+        this.velocity.x += -this.acceleration
         this.lastDirection = 'left'
     } else {
         if (this.lastDirection === 'left'){

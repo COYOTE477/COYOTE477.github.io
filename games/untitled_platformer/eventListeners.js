@@ -22,6 +22,8 @@ window.addEventListener('keydown', (event) => {
 
         case 'r':
             levels[level].init()
+            player.velocity.y = 0
+            player.velocity.x = 0
             player.preventInput = false
             talking = false
             break

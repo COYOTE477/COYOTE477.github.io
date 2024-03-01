@@ -288,6 +288,8 @@ let levels = {
             collisionBlocks = parsedCollisions.createObjectsFrom2D()
             player.position.x = 32
             player.position.y = 96
+            player.friction = 0.85
+            player.acceleration = 1
             player.collisionBlocks = collisionBlocks
 
             if (player.currentAnimation) player.currentAnimation.isActive = false
