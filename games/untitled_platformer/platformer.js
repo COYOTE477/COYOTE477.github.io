@@ -17,6 +17,7 @@ let background
 let map
 let doors
 let npcs
+let movingwall
 let talking = false
 let faces = [
     new Sprite({
@@ -288,7 +289,7 @@ let levels = {
             collisionBlocks = parsedCollisions.createObjectsFrom2D()
             player.position.x = 32
             player.position.y = 96
-            player.friction = 0.85
+            player.friction = 0.9
             player.acceleration = 1
             player.collisionBlocks = collisionBlocks
 
@@ -341,8 +342,53 @@ let levels = {
             doors = [
                 new Sprite({
                     position: {
-                        x: 0,
+                        x: 32,
                         y: 352
+                    },
+                    imageSrc: './art/door/openneptune.png',
+                    frameCount:5,
+                    frameBuffer: 5,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
+    },
+    7: {
+        init: () => {
+            parsedCollisions = collisionsLevel7.parse2D()
+            collisionBlocks = parsedCollisions.createObjectsFrom2D()
+            player.position.x = 96
+            player.position.y = 480
+            player.friction = 0.9
+            player.acceleration = 1
+            player.collisionBlocks = collisionBlocks
+
+            if (player.currentAnimation) player.currentAnimation.isActive = false
+
+            npcs = []
+            
+            background = new Sprite({
+                imageSrc: './art/levels/backgroundneptune.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+
+            map = new Sprite({
+                imageSrc: './art/levels/level7.png',
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+            })
+            
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 896,
+                        y: 160
                     },
                     imageSrc: './art/door/openneptune.png',
                     frameCount:5,
@@ -443,6 +489,14 @@ function animate() {
     collisionBlocks.forEach(CollisionBlock => {
         CollisionBlock.draw()
     })
+    if (player.position.y >= 600) {
+        
+        levels[level].init()
+        player.velocity.y = 0
+        player.velocity.x = 0
+        player.preventInput = false
+        talking = false
+    }
     doors.forEach(door => {
         door.draw()
     })
@@ -451,6 +505,11 @@ function animate() {
         npc.update()
         npc.draw()
     })}
+    if (movingwall) {
+        movingwall.forEach(movingwall => {
+            movingwall.draw()
+            movingwall.update()
+        })}
     //player.velocity.x = 0
     player.handleInput(keys)
     player.update()
